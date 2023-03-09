@@ -67,42 +67,54 @@ imageRightDom[activeImage].classList.add('border');
 const nextDom = document.querySelector('#next');
 const prevDom = document.querySelector('#prev');
 
-nextDom.addEventListener('click', 
-    function(){
-        if(activeImage < imagesWrapperDom.length - 1){
-            imagesWrapperDom[activeImage].classList.remove('show');
-            imageRightDom[activeImage].classList.remove('border');
-            activeImage++;
-            imagesWrapperDom[activeImage].classList.add('show');
-            imageRightDom[activeImage].classList.add('border');
-            
-        }else if(activeImage == imagesWrapperDom.length - 1){
-            imagesWrapperDom[activeImage].classList.remove('show');
-            imageRightDom[activeImage].classList.remove('border');
-            activeImage = 0;
-            imagesWrapperDom[activeImage].classList.add('show');
-            imageRightDom[activeImage].classList.add('border');
-        }
-        
-    }
-);
+nextDom.addEventListener('click', next);
 
-prevDom.addEventListener('click', 
-    function(){
-        if(activeImage > 0){
-            imagesWrapperDom[activeImage].classList.remove('show');
-            imageRightDom[activeImage].classList.remove('border');
-            activeImage--;
-            imagesWrapperDom[activeImage].classList.add('show');
-            imageRightDom[activeImage].classList.add('border');
-        }else if(activeImage == 0){
-            imagesWrapperDom[activeImage].classList.remove('show');
-            imageRightDom[activeImage].classList.remove('border');
-            activeImage = imagesWrapperDom.length - 1;
-            imagesWrapperDom[activeImage].classList.add('show');
-            imageRightDom[activeImage].classList.add('border');
+prevDom.addEventListener('click', prev);
 
-        }
+function next(){
+    if(activeImage < imagesWrapperDom.length - 1){
+        imagesWrapperDom[activeImage].classList.remove('show');
+        imageRightDom[activeImage].classList.remove('border');
+        activeImage++;
+        imagesWrapperDom[activeImage].classList.add('show');
+        imageRightDom[activeImage].classList.add('border');
         
+    }else if(activeImage == imagesWrapperDom.length - 1){
+        imagesWrapperDom[activeImage].classList.remove('show');
+        imageRightDom[activeImage].classList.remove('border');
+        activeImage = 0;
+        imagesWrapperDom[activeImage].classList.add('show');
+        imageRightDom[activeImage].classList.add('border');
     }
-);
+    clearInterval(play);
+
+}
+
+function prev(){
+    if(activeImage > 0){
+        imagesWrapperDom[activeImage].classList.remove('show');
+        imageRightDom[activeImage].classList.remove('border');
+        activeImage--;
+        imagesWrapperDom[activeImage].classList.add('show');
+        imageRightDom[activeImage].classList.add('border');
+    }else if(activeImage == 0){
+        imagesWrapperDom[activeImage].classList.remove('show');
+        imageRightDom[activeImage].classList.remove('border');
+        activeImage = imagesWrapperDom.length - 1;
+        imagesWrapperDom[activeImage].classList.add('show');
+        imageRightDom[activeImage].classList.add('border');
+
+    }
+    clearInterval(play);
+
+}
+
+/*BONUS 2:
+Aggiungere funzionalità di autoplay: 
+dopo un certo periodo di tempo (3 secondi) 
+l’immagine attiva dovrà cambiare alla successiva.*/
+function play (){
+    setInterval(next, 3000);
+}
+play();
+    
