@@ -26,11 +26,14 @@ const imagesArray = [
 	},
 ];
 
+
+
 const imageListDom = document.querySelector('.img-list');
 const rightImageList = document.querySelector('.img-list-right');
 
 let imageContent = "";
-let imageContentRight = "";
+
+
 
 for(let i = 0; i < imagesArray.length; i++){
     const newImageWrapper = `<div class="img-wrapper">
@@ -41,16 +44,26 @@ for(let i = 0; i < imagesArray.length; i++){
 
     imageContent += newImageWrapper;
 
-    const newImageRight = ` <div class="img-right">
-                                <img class="image" src="img/${imagesArray[i].image}" alt="">
-                            </div>`;
+    const newThumb = document.createElement('div');
+    newThumb.classList.add('img-right');
+    newThumb.innerHTML= ` <img class="image" src="img/${imagesArray[i].image}" alt="">`;
 
-    imageContentRight += newImageRight;
+    rightImageList.append(newThumb);
+
+    newThumb.addEventListener('click', function(){
+        imagesWrapperDom[activeImage].classList.remove('show');
+        imageRightDom[activeImage].classList.remove('border');
+    
+        activeImage = i;
+           
+        imagesWrapperDom[activeImage].classList.add('show');
+        imageRightDom[activeImage].classList.add('border');
+    
+    });
     
 }
 
 imageListDom.innerHTML = imageContent;
-rightImageList.innerHTML = imageContentRight;
 
 
 
@@ -86,7 +99,6 @@ function next(){
         imagesWrapperDom[activeImage].classList.add('show');
         imageRightDom[activeImage].classList.add('border');
     }
-    clearInterval(play);
 
 }
 
@@ -105,7 +117,15 @@ function prev(){
         imageRightDom[activeImage].classList.add('border');
 
     }
-    clearInterval(play);
+
+}
+
+function interval(){
+    if(direction == 'next'){
+        next();
+    }else{
+        prev();
+    }
 
 }
 
@@ -113,8 +133,31 @@ function prev(){
 Aggiungere funzionalità di autoplay: 
 dopo un certo periodo di tempo (3 secondi) 
 l’immagine attiva dovrà cambiare alla successiva.*/
-function play (){
-    setInterval(next, 3000);
-}
-play();
+let clock = setInterval(interval, 3000);
+
+/*BONUS 3:
+Aggiungere bottoni di start/stop 
+e di inversione del meccanismo di autoplay. */
+let direction = 'next';
+const reverseDom=document.getElementById('reverse');
+reverseDom.addEventListener('click',function(){
+    if(direction == 'next'){
+        direction='prev';
+    }else{
+        direction='next'
+    }
+});
+
+const startStopDom = document.getElementById('startStop');
+startStopDom.addEventListener('click',function(){
+    if(clock == null){
+        clock = setInterval(interval, 3000);
+
+    }else{
+        clearInterval(clock);
+        clock = null;
+
+    }
+});
+
     

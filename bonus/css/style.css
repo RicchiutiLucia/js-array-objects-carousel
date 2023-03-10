@@ -97,19 +97,43 @@ p{
     bottom: 10px;
 }
 
-#play {
-    color: #242839;
-    border-radius: 5px;
-    padding: 10px;
-    border: 2px dashed gray;
-    font-size: 40px;
-    cursor: pointer;
+#play{
+    text-align: center;
 }
-#stop {
-    color: #242839;
-    border-radius: 5px;
-    padding: 10px;
-    border: 2px dashed gray;
-    font-size: 40px;
-    cursor: pointer;
+#stop{
+    text-align: center;
+}
+#reverse{
+    text-align: center;
+}
+
+
+#startStop{
+    position: absolute;
+    top: 20px;
+    left: 27%;
+    transform: translate(-50%);
+    
+}
+#reverse{
+    position: absolute;
+    top:20px;
+    left: 20%;
+    transform: translate(-50%);
+    
+}
+
+
+button{
+    
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 3px solid;
+    background-color: white;
+    transition: all 1s;
+}
+
+button:hover{
+    background-color: black;
+    color: white;
 }
